@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>IDOR</title>
+</head>
+
+<h1>Insecure Direct Object Reference (IDOR)</h1>
+<h3>Mira que inocentes son nuestros gatos!</h3>
+
+{% if image %}
+<img src="/static/images/{{ image }}" width="400" height="400">
+{% else %}
+<p>Elegi un gato de la lista</p>
+{% endif %}
+
+<body>
+    <ul>
+        <li><a href="/idor/1">Tierno</a></li>
+        <li><a href="/idor/2">Adorable</a></li>
+        <li><a href="/idor/3">Hermoso</a></li>
+    </ul>
+</body>
+
+</html>
