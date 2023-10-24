@@ -1,0 +1,21 @@
+{# {% extends 'base.html' %} #}
+
+{# {% block content %} #}
+
+<h1>Client-side Validation</h1>
+
+<h1>Bienvenido a EkoPagos!</h1>
+
+<p>Selecciona el importe a transferir</p>
+
+<form method="post">
+    <label for="title">Importe</label>
+    <br>
+    <input type="number" name="importe" min="1" placeholder="" value="0">
+    <br>
+    <button type="submit">Transferir</button>
+</form>
+
+<p>Saldo disponible: {{ saldo }}</p>
+
+{# {% endblock %} #}

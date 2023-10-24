@@ -1,5 +1,8 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": null,
+    "python.linting.pylintArgs": [
+        "--disable=C0111"
+    ]
 }
