@@ -1,5 +1,5 @@
 import base64
-from flask import Flask, make_response, request
+from flask import Flask, make_response, redirect, request, url_for
 from flask import render_template
 import sqlite3
 from flask import g
@@ -88,3 +88,10 @@ def sqli():
         return render_template("sqli.html", )
 
 ###################################################
+
+@app.route("/rxss")
+def rxss():
+    archivo = request.args.get('archivo')
+    if not archivo:
+        return redirect(url_for('rxss', archivo='password.txt'))
+    return render_template("rxss.html", archivo=archivo)
