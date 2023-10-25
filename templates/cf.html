@@ -1,0 +1,27 @@
+{# {% extends 'base.html' %} #}
+
+{# {% block content %} #}
+
+<h1>Cookie Forgery</h1>
+
+{% if logueado %}
+<h1>Bienvenido {{ nombre }}!</h1>
+{% else %}
+<h1>Usa el formulario para ingresar</h1>
+
+<form method="post">
+    <label for="title">Nombre</label>
+    <input type="text" name="name" value="pepe">
+    <br>
+    
+    <label for="title">Contraseña</label>
+    <input type="password" name="pass" value="passresegura">
+    <br>
+    
+    <button type="submit">Acceder</button>
+</form>
+
+{% endif %}
+
+
+{# {% endblock %} #}
