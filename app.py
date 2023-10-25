@@ -76,9 +76,15 @@ def sqli():
     if request.method == 'POST':
         nombre = request.form['name']
         password = request.form['pass']
-        valid = query_db(f"SELECT Nombre FROM Usuarios WHERE Nombre = '{nombre}' AND Pass = '{password}';")
-        print(valid)
-        message = f"Bienvenido {nombre}" if valid else "Usuario o contraseña incorrecta"
+        dbname = query_db(f"SELECT Nombre FROM Usuarios WHERE Nombre = '{nombre}' AND Pass = '{password}';")
+        print(dbname)
+        if dbname and dbname[0] and dbname[0][0] == nombre:
+            print(dbname[0][0])
+            message = f"Bienvenido {dbname[0][0]}"
+        else:
+            message = "Usuario o contraseña incorrecta"
         return render_template("sqli.html", message=message)
     else:
         return render_template("sqli.html", )
+
+###################################################
