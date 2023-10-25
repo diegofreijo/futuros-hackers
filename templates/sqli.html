@@ -1,0 +1,28 @@
+{# {% extends 'base.html' %} #}
+
+{# {% block content %} #}
+
+<h1>SQL Injection</h1>
+
+{% if message %}
+
+<h2>{{ message }}</h2>
+
+{% else %}
+
+<form method="post">
+    <label for="title">Nombre</label>
+    <input type="text" name="name" value="pepe">
+    <br>
+
+    <label for="title">Contraseña</label>
+    <input type="password" name="pass" value="soypepe">
+    <br>
+
+    <button type="submit">Acceder</button>
+</form>
+
+{% endif %}
+
+
+{# {% endblock %} #}

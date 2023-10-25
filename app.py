@@ -1,6 +1,8 @@
 import base64
 from flask import Flask, make_response, request
 from flask import render_template
+import sqlite3
+from flask import g
 
 app = Flask(__name__)
 
@@ -46,3 +48,37 @@ def cf():
             nombre = None
         logueado = nombre is not None
         return render_template("cf.html", nombre=nombre, logueado=logueado)
+
+###################################################
+
+DATABASE = 'database.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+@app.teardown_appcontext
+def close_connection(_exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
+
+@app.route("/sqli", methods=(['GET', 'POST']))
+def sqli():
+    if request.method == 'POST':
+        nombre = request.form['name']
+        password = request.form['pass']
+        valid = query_db(f"SELECT Nombre FROM Usuarios WHERE Nombre = '{nombre}' AND Pass = '{password}';")
+        print(valid)
+        message = f"Bienvenido {nombre}" if valid else "Usuario o contraseña incorrecta"
+        return render_template("sqli.html", message=message)
+    else:
+        return render_template("sqli.html", )
