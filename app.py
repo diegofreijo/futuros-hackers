@@ -1,7 +1,7 @@
 import base64
+import sqlite3
 from flask import Flask, make_response, redirect, request, url_for
 from flask import render_template
-import sqlite3
 from flask import g
 
 app = Flask(__name__)
@@ -51,12 +51,10 @@ def cf():
 
 ###################################################
 
-DATABASE = 'database.db'
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
+        db = g._database = sqlite3.connect('database.db')
     return db
 
 @app.teardown_appcontext
