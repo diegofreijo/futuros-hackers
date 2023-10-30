@@ -1,0 +1,1 @@
+Soy el archivo "publico2.txt" y cualquiera me puede ver.

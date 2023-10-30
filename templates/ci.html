@@ -1,0 +1,28 @@
+{# {% extends 'base.html' %} #}
+
+{# {% block content %} #}
+
+<h1>Bienvenido/a a EkoExplorer!</h1>
+
+<p>Elegi un archivo para ver:</p>
+
+<ul>
+    <li><a href="?archivo=publico1.txt">publico1.txt</a></li>
+    <li><a href="?archivo=publico2.txt">publico2.txt</a></li>
+</ul>
+
+{% if mensaje %}
+<p>{{ mensaje }}</p>
+{% endif %}
+
+{% if output %}
+
+<p>Ejecutando:</p>
+<pre>{{cmd}}</pre>
+
+<p>Resultado:</p>
+<pre>{{output}}</pre>
+
+{% endif %}
+
+{# {% endblock %} #}

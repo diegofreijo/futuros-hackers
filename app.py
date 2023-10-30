@@ -3,6 +3,8 @@ import sqlite3
 from flask import Flask, make_response, redirect, request, url_for
 from flask import render_template
 from flask import g
+import subprocess
+import os
 
 app = Flask(__name__)
 
@@ -75,9 +77,9 @@ def sqli():
         nombre = request.form['name']
         password = request.form['pass']
         dbname = query_db(f"SELECT Nombre FROM Usuarios WHERE Nombre = '{nombre}' AND Pass = '{password}';")
-        print(dbname)
+        # print(dbname)
         if dbname and dbname[0] and dbname[0][0] == nombre:
-            print(dbname[0][0])
+            # print(dbname[0][0])
             message = f"Bienvenido {dbname[0][0]}"
         else:
             message = "Usuario o contraseña incorrecta"
@@ -93,3 +95,19 @@ def rxss():
     if not archivo:
         return redirect(url_for('rxss', archivo='password.txt'))
     return render_template("rxss.html", archivo=archivo)
+
+@app.route("/ci")
+def ci():
+    archivo = request.args.get('archivo')
+    cmd = None
+    output = None
+    if archivo:
+        if archivo.startswith("publico"):
+            cmd = f"cat {archivo}"
+            proc = subprocess.Popen(["bash", "-c", cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd="static")
+            o, e = proc.communicate()
+            output = o.decode("ascii") + e.decode("ascii")
+        else:
+            cmd = "(nada)"
+            output = "ERROR: El nombre del archivo debe comenzar con 'publico'"
+    return render_template("ci.html", archivo=archivo, cmd=cmd, output=output)

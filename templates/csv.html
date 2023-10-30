@@ -2,11 +2,11 @@
 
 {# {% block content %} #}
 
-<h1>Client-side Validation</h1>
+<h1>Bienvenido/a a EkoPagos!</h1>
 
-<h1>Bienvenido a EkoPagos!</h1>
+<p>Saldo disponible: ${{ saldo }}</p>
 
-<p>Selecciona el importe a transferir</p>
+<p>Selecciona el importe a transferir. Debe ser mayor a cero.</p>
 
 <form method="post">
     <label for="title">Importe</label>
@@ -14,7 +14,5 @@
     <br>
     <button type="submit">Transferir</button>
 </form>
-
-<p>Saldo disponible: ${{ saldo }}</p>
 
 {# {% endblock %} #}
