@@ -4,22 +4,28 @@
 
 {% block content %}
 
-<h1>Bienvenido/a a EkOreos!</h1>
+{% if mensaje %}
+<p>{{ mensaje }}</p>
+{% endif %}
 
 {% if logueado %}
-<h1>Bienvenido {{ nombre }}!</h1>
-{% else %}
-<p>Usa el formulario para ingresar</p>
+<h2>Hola {{ nombre }}</h2>
 
+{% if data %}
+<p>{{ data }}</p>
+{% endif %}
+
+{% else %}
+<h1>Bienvenido/a a EkOreos!</h1>
 <form method="post">
     <label for="title">Nombre</label>
     <input type="text" name="name" value="pepe">
     <br>
-    
+
     <label for="title">Contraseña</label>
     <input type="password" name="pass" value="passresegura">
     <br>
-    
+
     <button type="submit">Acceder</button>
 </form>
 

@@ -38,22 +38,35 @@ def csv():
 @app.route("/cf", methods=(['GET', 'POST']))
 def cf():
     if request.method == 'POST':
-        nombre = "pepe"
-        resp = make_response(render_template('cf.html', nombre=nombre, logueado=True))
-
-        nombre64 = base64.b64encode(nombre.encode())
-        resp.set_cookie('nombre', nombre64.decode())
-
-        return resp
+        nombre = request.form['name']
+        password = request.form['pass']
+        
+        if nombre == "pepe" and password == "passresegura":
+            resp = make_response(respuesta_usuario_logueado(nombre))
+            nombre64 = base64.b64encode(nombre.encode())
+            resp.set_cookie('nombre', nombre64.decode())
+            return resp
+        else:
+            mensaje = "Usuario o contraseña incorrectos"
+            return make_response(render_template('cf.html', logueado=False, mensaje=mensaje))
     else:
         if 'nombre' in request.cookies:
             nombre64 = request.cookies.get('nombre')
-            print(nombre64)
             nombre = base64.b64decode(nombre64).decode()
+            return respuesta_usuario_logueado(nombre)
         else:
-            nombre = None
-        logueado = nombre is not None
-        return render_template("cf.html", nombre=nombre, logueado=logueado)
+            return render_template("cf.html", logueado=False)
+
+def respuesta_usuario_logueado(nombre):
+    data = None
+    if nombre == "pepe":
+        data = "Aca va la informacion personal de pepe"
+    elif nombre == "admin":
+        data = "Aca va la informacion personal de admin. Como es admin, podria llegar a ver la informacion de todos los demas usuarios"
+    else:
+        data = "ERROR: No encontre informacion de este usuario"
+    return render_template("cf.html", nombre=nombre, logueado=True, data=data)
+
 
 ###################################################
 
