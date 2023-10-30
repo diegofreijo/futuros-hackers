@@ -1,13 +1,15 @@
-{# {% extends 'base.html' %} #}
+{% extends 'base.html' %}
 
-{# {% block content %} #}
+{% block title %}EkOreos{% endblock %}
+
+{% block content %}
 
 <h1>Bienvenido/a a EkOreos!</h1>
 
 {% if logueado %}
 <h1>Bienvenido {{ nombre }}!</h1>
 {% else %}
-<h1>Usa el formulario para ingresar</h1>
+<p>Usa el formulario para ingresar</p>
 
 <form method="post">
     <label for="title">Nombre</label>
@@ -24,4 +26,4 @@
 {% endif %}
 
 
-{# {% endblock %} #}
+{% endblock %}

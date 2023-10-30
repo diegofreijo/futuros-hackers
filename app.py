@@ -8,6 +8,10 @@ import os
 
 app = Flask(__name__)
 
+@app.route("/")
+def index():
+    return render_template("index.html",)
+
 
 @app.route("/idor", strict_slashes=False)
 @app.route("/idor/<int:cat>")
@@ -91,10 +95,10 @@ def sqli():
 
 @app.route("/rxss")
 def rxss():
-    archivo = request.args.get('archivo')
-    if not archivo:
-        return redirect(url_for('rxss', archivo='password.txt'))
-    return render_template("rxss.html", archivo=archivo)
+    usuario = request.args.get('usuario')
+    if not usuario:
+        return redirect(url_for('rxss', usuario='Cosme Fulanito'))
+    return render_template("rxss.html", usuario=usuario)
 
 @app.route("/ci")
 def ci():

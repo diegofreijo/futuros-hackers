@@ -1,9 +1,11 @@
-{# {% extends 'base.html' %} #}
+{% extends 'base.html' %}
 
-{# {% block content %} #}
+{% block title %}EkoBook{% endblock %}
 
-<h1>Bienvenido/a al EkoExplorer!</h1>
+{% block content %}
 
-<p>ERROR! No se encontro el archivo {{ archivo | safe }}</p>
+<h1>Bienvenido/a a EkoBook!</h1>
 
-{# {% endblock %} #}
+<p>ERROR! No se encontro el usuario {{ usuario | safe }}</p>
+
+{% endblock %}
