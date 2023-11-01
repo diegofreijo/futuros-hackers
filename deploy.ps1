@@ -23,7 +23,7 @@ while (-not (Test-Path $TarFilename)) {
     Start-Sleep -Seconds 1  # Wait for 1 second before checking again
 }
 
-Compress-Archive -Path $TarFilename -DestinationPath $TarGzipFilename
+Compress-Archive -Path $TarFilename -DestinationPath $TarGzipFilename -Force
 
 # Upload the Docker image to your VPS using SCP
 scp -i $VPS_SSH_KEY $TarGzipFilename "$($VPS_USERNAME)@$($VPS_IP):$($REMOTE_DIR)/$TarGzipFilename"
